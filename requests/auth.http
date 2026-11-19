@@ -1,0 +1,51 @@
+### Inscription valide
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "firstname": "Selim",
+  "lastname": "Touileb",
+  "email": "selim.touileb@hotmail.com",
+  "password": "Selim1234"
+}
+
+
+### Connexion utilisateur
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ronaldo@madrid.com",
+  "password": "Portugal10"
+}
+
+### Connexion admin
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@greenroots.fr",
+  "password": "Admin123!"
+}
+
+
+
+### Renouvellement des tokens
+POST http://localhost:3000/api/auth/refresh
+
+### Refresh avec token invalide
+POST http://127.0.0.1:3000/api/auth/refresh
+Cookie: refreshToken=faux-token
+
+### Déconnexion
+POST http://localhost:3000/api/auth/logout
+
+### Test route trees protégée - sans connexion
+GET http://127.0.0.1:3000/api/trees
+
+### Test route trees protégée - avec connexion
+GET http://localhost:3000/api/trees
+
+### Test route trees protégée - token invalide
+GET http://127.0.0.1:3000/api/trees
+Cookie: accessToken=faux-token

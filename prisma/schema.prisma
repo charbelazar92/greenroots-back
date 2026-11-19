@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum OrderStatus {
+  pending
+  validated
+  cancelled
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  firstname String   @db.VarChar(128)
+  lastname  String   @db.VarChar(128)
+  email      String   @unique @db.VarChar(254)
+  password   String   @db.VarChar(255)
+  role       Role     @default(user)
+  created_at DateTime @default(now()) @db.Timestamptz
+  updated_at DateTime @updatedAt @db.Timestamptz
+
+  orders         Order[]
+  refresh_tokens RefreshToken[]
+
+  @@map("users")
+}
+
+model Tree {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(128)
+  price       Decimal  @db.Decimal(10, 2)
+  slug        String   @unique @db.VarChar(100)
+  species     String   @db.VarChar(128)
+  description String?  @db.Text
+  url_image   String?  @db.Text
+  available   Boolean  @default(true)
+  created_at  DateTime @default(now()) @db.Timestamptz
+  updated_at  DateTime @updatedAt @db.Timestamptz
+
+  order_trees OrderTree[]
+
+  @@map("trees")
+}
+
+model Order {
+  id           Int         @id @default(autoincrement())
+  order_number String      @unique @db.VarChar(50)
+  order_date   DateTime    @default(now())
+  status       OrderStatus @default(pending)
+  total_amount Decimal     @db.Decimal(10, 2)
+  created_at   DateTime    @default(now()) @db.Timestamptz
+  updated_at   DateTime    @updatedAt @db.Timestamptz
+
+  user    User? @relation(fields: [user_id], references: [id], onDelete: SetNull)
+  user_id Int?
+
+  order_trees OrderTree[]
+
+  @@map("orders")
+}
+
+model OrderTree {
+  id         Int     @id @default(autoincrement())
+  quantity   Int
+  unit_price Decimal @db.Decimal(10, 2)
+
+  order    Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  order_id Int
+  tree     Tree  @relation(fields: [tree_id], references: [id], onDelete: Restrict)
+  tree_id  Int
+
+  @@map("order_trees")
+}
+
+model RefreshToken {
+  id Int @id @default(autoincrement())
+
+  token String @unique @db.VarChar(512)
+
+  user    User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id Int
+
+  issued_at  DateTime @default(now()) @db.Timestamptz
+  expires_at DateTime @db.Timestamptz
+
+  @@map("refresh_token")
+}

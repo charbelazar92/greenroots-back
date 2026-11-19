@@ -1,0 +1,47 @@
+### Récupérer toutes les commandes
+GET http://localhost:3000/api/admin/orders
+
+
+### Valider une commande
+PATCH http://localhost:3000/api/admin/orders/32/status
+Content-Type: application/json
+
+{
+  "status": "validated"
+}
+
+
+### Annuler une commande
+PATCH http://localhost:3000/api/admin/orders/32/status
+Content-Type: application/json
+
+{
+  "status": "cancelled"
+}
+
+
+### Refuser le retour au statut pending
+PATCH http://localhost:3000/api/admin/orders/32/status
+Content-Type: application/json
+
+{
+  "status": "pending"
+}
+
+
+### Refuser un identifiant inexistant
+PATCH http://localhost:3000/api/admin/orders/99999999/status
+Content-Type: application/json
+
+{
+  "status": "validated"
+}
+
+
+### Refuser un identifiant invalide
+PATCH http://localhost:3000/api/admin/orders/bonjour/status
+Content-Type: application/json
+
+{
+  "status": "validated"
+}

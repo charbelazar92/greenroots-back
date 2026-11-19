@@ -1,0 +1,69 @@
+### Connexion de Julien
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "julien.dupont@example.com",
+  "password": "User123!"
+}
+
+### Création d'une commande
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "treeId": 1,
+      "quantity": 15
+    },
+    {
+      "treeId": 2,
+      "quantity": 10
+    }
+  ]
+}
+
+### Récupération d'une commande
+### Remplacer 4 par l'identifiant retourné après la création
+GET http://localhost:3000/api/orders/10
+
+### Création avec un panier vide
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "items": []
+}
+
+### Création avec une quantité invalide
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "treeId": 1,
+      "quantity": 0
+    }
+  ]
+}
+
+### Création avec un arbre inexistant
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "treeId": 999999,
+      "quantity": 1
+    }
+  ]
+}
+
+### Récupération avec un ID invalide
+GET http://localhost:3000/api/orders/abc
+
+### Récupération d'une commande inexistante
+GET http://localhost:3000/api/orders/999999

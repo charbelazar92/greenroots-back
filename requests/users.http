@@ -1,0 +1,32 @@
+### Modifier uniquement le prénom de l’utilisateur connecté
+PATCH http://localhost:3000/api/users/me/profile
+Content-Type: application/json
+
+{
+  "firstname": "Alice"
+}
+
+### Refuser un prénom vide
+PATCH http://localhost:3000/api/users/me/profile
+Content-Type: application/json
+
+{
+  "firstname": ""
+}
+
+### Refuser une adresse e-mail appartenant à un autre compte
+PATCH http://localhost:3000/api/users/me/profile
+Content-Type: application/json
+
+{
+  "email": "julien.dupont@example.com"
+}
+
+
+### Suppression de mon compte
+DELETE http://localhost:3000/api/users/me
+Content-Type: application/json
+
+{
+  "password": "Portugal10"
+}
