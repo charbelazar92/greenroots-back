@@ -2,14 +2,11 @@
 @baseUrl = http://localhost:3000
 @slug = hello34
 
-
 ### Récupérer tous les arbres
 GET {{baseUrl}}/api/trees
 
-
 ### Récupérer le détail d'un arbre par son slug
 GET {{baseUrl}}/api/trees/{{slug}}
-
 
 ### Ajouter un arbre (avec upload d'image)
 POST {{baseUrl}}/api/trees/
@@ -96,10 +93,36 @@ Content-Disposition: form-data; name="available"
 true
 --WebAppBoundary--
 
-
 ### Supprimer un arbre par son slug
 DELETE {{baseUrl}}/api/trees/{{slug}}
 
-
 ### Tester un slug qui n'existe pas (doit renvoyer 404)
 GET {{baseUrl}}/api/trees/slug-inexistant
+
+### C9 Nom déjà existant + nouvelle image (doit renvoyer 409)
+# Avant : enregistrer chene-pedoncule.webp depuis le bucket (sauvegarde)
+POST {{baseUrl}}/api/trees/
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="name"
+
+Chêne pédonculé
+--WebAppBoundary
+Content-Disposition: form-data; name="price"
+
+12.90
+--WebAppBoundary
+Content-Disposition: form-data; name="species"
+
+Quercus robur
+--WebAppBoundary
+Content-Disposition: form-data; name="available"
+
+on
+--WebAppBoundary
+Content-Disposition: form-data; name="image"; filename="autre-arbre.jpg"
+Content-Type: image/jpeg
+
+< ./images-test/autre-arbre.jpg
+--WebAppBoundary--

@@ -1,0 +1,52 @@
+#Nom du workflow
+name: CI back
+
+#Définir les évenements qui déclenche le workflow
+on:
+  push: #Un push ou un mrge va  declencher le workflow
+    branches: [main]
+  pull_request: #La création de pull request vers main va déclencher le workflow
+    branches: [main]
+
+
+#Ces étapes vont s'executé dans le runner
+jobs:
+  
+  tests:
+    # Nom du job (ce qu'on veut)
+    name: Vérification et tests unitaires
+    #Choix du runner
+    runs-on: ubuntu-latest
+
+    # Valeurs factices : les tests unitaires n'utilisent ni la vraie base
+    # ni Supabase, mais le code a besoin que ces variables existent.
+    env:
+      DATABASE_URL: postgresql://user:password@localhost:5432/ci
+      SUPABASE_URL: https://exemple.supabase.co
+      SUPABASE_SERVICE_ROLE_KEY: cle-factice-pour-la-ci
+      JWT_SECRET: secret-factice-pour-la-ci-uniquement
+      FRONTEND_URL: http://localhost:5173
+      NODE_ENV: test
+
+    steps:
+    #Récupérer le code du dépot dans le runner 
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+    #Mettre en place Node.js
+      - name: Installer Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22 #version de node.js
+          cache: npm
+      #installe les dépendances
+      - name: Installer les dépendances
+        run: npm ci
+      #Génère le client prisma
+      - name: Générer le client Prisma
+        run: npx prisma generate
+      #Vérifie typescript
+      - name: Vérifier le TypeScript
+        run: npm run typecheck
+      #Execute les tests
+      - name: Lancer les tests unitaires
+        run: npm run test:unit
