@@ -66,7 +66,7 @@ const trees = [
     price: "12.90",
     description:
       "Arbre emblématique des forêts françaises, pouvant vivre plusieurs siècles. Favorise la biodiversité locale.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/chene-pedoncule.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/chene-pedoncule.webp", 
     available: true,
   },
   {
@@ -76,7 +76,7 @@ const trees = [
     price: "9.50",
     description:
       "Petit érable rustique, idéal pour les haies champêtres et la stabilisation des sols.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/erable-champetre.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/erable-champetre.webp", 
     available: true,
   },
   {
@@ -86,7 +86,7 @@ const trees = [
     price: "14.00",
     description:
       "Conifère résistant, adapté aux sols pauvres, pilier de nombreux programmes de reboisement.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/pin-sylvestre.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/pin-sylvestre.webp", 
     available: true,
   },
   {
@@ -96,7 +96,7 @@ const trees = [
     price: "8.90",
     description:
       "Croissance rapide, excellent pionnier pour recoloniser les sols dégradés.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/bouleau-verruqueux.webp",
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/bouleau-verruqueux.webp",
     available: true,
   },
   {
@@ -106,7 +106,7 @@ const trees = [
     price: "10.50",
     description:
       "Souvent utilisé en haies, feuillage dense offrant un abri à la faune locale.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/charme-commun.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/charme-commun.webp", 
     available: true,
   },
   {
@@ -116,7 +116,7 @@ const trees = [
     price: "13.20",
     description:
       "Grand arbre forestier à croissance lente, essentiel pour les écosystèmes tempérés.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/hetre-commun.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/hetre-commun.webp", 
     available: true,
   },
   {
@@ -126,7 +126,7 @@ const trees = [
     price: "11.80",
     description:
       "Arbre mellifère très apprécié des abeilles, souvent planté en zones urbaines et rurales.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/tilleul-petites-feuilles.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/tilleul-petites-feuilles.webp", 
     available: true,
   },
   {
@@ -136,7 +136,7 @@ const trees = [
     price: "10.00",
     description:
       "Arbre à croissance rapide, bois souple traditionnellement utilisé en menuiserie.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/frene-commun.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/frene-commun.webp", 
     available: true,
   },
   {
@@ -146,7 +146,7 @@ const trees = [
     price: "7.50",
     description:
       "Arbuste polyvalent, idéal en sous-bois, produit des noisettes appréciées de la faune.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/noisetier-commun.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/noisetier-commun.webp", 
     available: true,
   },
   {
@@ -156,7 +156,7 @@ const trees = [
     price: "9.90",
     description:
       "Spécialiste des zones humides, améliore la qualité des sols grâce à la fixation d'azote.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/aulne-glutineu.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/aulne-glutineux.webp", 
     available: false,
   },
   {
@@ -166,7 +166,7 @@ const trees = [
     price: "11.00",
     description:
       "Petit arbre ornemental aux baies rouges très prisées par les oiseaux en hiver.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/sorbier-des-oiseleurs.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/sorbier-des-oiseleurs.webp", 
     available: true,
   },
   {
@@ -176,7 +176,7 @@ const trees = [
     price: "15.50",
     description:
       "Grand arbre productif, connu pour ses châtaignes et son bois durable.",
-    url_image: "https://evkwglpodhjhtrtjtadl.supabase.co/storage/v1/object/public/tree-images/chataignier-commun.webp", 
+    url_image: "https://qpsahhlrtcctoviemzog.supabase.co/storage/v1/object/public/tree-images/chataignier-commun.webp", 
     available: false,
   },
 ];
