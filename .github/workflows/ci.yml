@@ -1,25 +1,26 @@
-#Nom du workflow
-name: CI back
+# Objectif de ce workflow
+# - Vérifier le TypeScript
+# - Lancer les tests unitaires
+# Render ne déploie que si ce workflow est vert ("After CI Checks Pass")
 
-#Définir les évenements qui déclenche le workflow
+# Nom du workflow (affiché sur GitHub)
+name: Run tests on API
+
+# Événements qui déclenchent le workflow
 on:
-  push: #Un push ou un mrge va  declencher le workflow
-    branches: [main]
-  pull_request: #La création de pull request vers main va déclencher le workflow
-    branches: [main]
+  push: # Un push ou un merge sur main déclenche le workflow
+    branches:
+      - main
+  pull_request: # Une PR vers main déclenche le workflow
+    branches:
+      - main
 
-
-#Ces étapes vont s'executé dans le runner
 jobs:
-  
-  tests:
-    # Nom du job (ce qu'on veut)
-    name: Vérification et tests unitaires
-    #Choix du runner
+  run_api_tests:
     runs-on: ubuntu-latest
 
     # Valeurs factices : les tests unitaires n'utilisent ni la vraie base
-    # ni Supabase, mais le code a besoin que ces variables existent.
+    # ni Supabase, mais le code a besoin que ces variables existent
     env:
       DATABASE_URL: postgresql://user:password@localhost:5432/ci
       SUPABASE_URL: https://exemple.supabase.co
@@ -29,24 +30,28 @@ jobs:
       NODE_ENV: test
 
     steps:
-    #Récupérer le code du dépot dans le runner 
-      - name: Récupérer le code
+      # Récupérer le code du dépôt dans le runner
+      - name: Checkout code
         uses: actions/checkout@v4
-    #Mettre en place Node.js
-      - name: Installer Node 22
+
+      # Mettre en place Node.js
+      - name: Install Node 22
         uses: actions/setup-node@v4
         with:
-          node-version: 22 #version de node.js
-          cache: npm
-      #installe les dépendances
-      - name: Installer les dépendances
+          node-version: '22'
+
+      # Installer les dépendances (npm ci respecte le package-lock.json)
+      - name: Install dependencies
         run: npm ci
-      #Génère le client prisma
-      - name: Générer le client Prisma
-        run: npx prisma generate
-      #Vérifie typescript
-      - name: Vérifier le TypeScript
+
+      # Générer le client Prisma
+      - name: Generate Prisma Client
+        run: npm run db:generate
+
+      # Vérifier le TypeScript
+      - name: Typecheck
         run: npm run typecheck
-      #Execute les tests
-      - name: Lancer les tests unitaires
+
+      # Exécuter les tests unitaires
+      - name: Run unit tests
         run: npm run test:unit
