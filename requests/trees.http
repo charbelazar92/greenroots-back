@@ -1,6 +1,6 @@
 ### Variables
 @baseUrl = http://localhost:3000
-@slug = hello34
+@slug = merisier-de-pays
 
 ### Récupérer tous les arbres
 GET {{baseUrl}}/api/trees
@@ -9,6 +9,37 @@ GET {{baseUrl}}/api/trees
 GET {{baseUrl}}/api/trees/{{slug}}
 
 ### Ajouter un arbre (avec upload d'image)
+POST {{baseUrl}}/api/trees/
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="name"
+
+Merisier
+--WebAppBoundary
+Content-Disposition: form-data; name="price"
+
+abc
+--WebAppBoundary
+Content-Disposition: form-data; name="species"
+
+Betula avium
+--WebAppBoundary
+Content-Disposition: form-data; name="description"
+
+Arbre emblématique des savanes africaines, capable de stocker de grandes quantités d'eau dans son tronc.
+--WebAppBoundary
+Content-Disposition: form-data; name="available"
+
+on
+--WebAppBoundary
+Content-Disposition: form-data; name="image"; filename="test-arbre.jpg"
+Content-Type: image/jpeg
+
+< ./images-test/test-arbre.jpg
+--WebAppBoundary--
+
+### C6 Création sans image (doit renvoyer 400 « Image manquante »)
 POST {{baseUrl}}/api/trees/
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
@@ -31,41 +62,10 @@ Arbre emblématique des savanes africaines, capable de stocker de grandes quanti
 --WebAppBoundary
 Content-Disposition: form-data; name="available"
 
-true
---WebAppBoundary
-Content-Disposition: form-data; name="image"; filename="test-arbre.jpg"
-Content-Type: image/jpeg
-
-< ./images-test/test-arbre.jpg
+on
 --WebAppBoundary--
 
-### Mettre à jour un arbre par son slug (sans upload d'image)
-PATCH {{baseUrl}}/api/trees/{{slug}}
-Content-Type: multipart/form-data; boundary=WebAppBoundary
 
---WebAppBoundary
-Content-Disposition: form-data; name="name"
-
-test
---WebAppBoundary
-Content-Disposition: form-data; name="price"
-
-9.50
---WebAppBoundary
-Content-Disposition: form-data; name="species"
-
-Acer campestre
---WebAppBoundary
-Content-Disposition: form-data; name="description"
-
-Petit érable rustique, idéal pour les haies champêtres et la stabilisation des sols.
---WebAppBoundary
-Content-Disposition: form-data; name="available"
-
-true
---WebAppBoundary
-Content-Disposition: form-data; name="image"; filename="test-arbre.jpg"
-Content-Type: image/jpeg
 
 ### Mettre à jour un arbre par son slug (sans upload d'image)
 PATCH {{baseUrl}}/api/trees/{{slug}}
@@ -96,8 +96,11 @@ true
 ### Supprimer un arbre par son slug
 DELETE {{baseUrl}}/api/trees/{{slug}}
 
-### Tester un slug qui n'existe pas (doit renvoyer 404)
+### Chercher un slug qui n'existe pas (doit renvoyer 404)
 GET {{baseUrl}}/api/trees/slug-inexistant
+
+### S2 Supprimer un slug qui n'existe pas (attendu 404, obtenu 500)
+DELETE {{baseUrl}}/api/trees/slug-inexistant
 
 ### C9 Nom déjà existant + nouvelle image (doit renvoyer 409)
 # Avant : enregistrer chene-pedoncule.webp depuis le bucket (sauvegarde)
@@ -107,11 +110,11 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 --WebAppBoundary
 Content-Disposition: form-data; name="name"
 
-Chêne pédonculé
+Merisier
 --WebAppBoundary
 Content-Disposition: form-data; name="price"
 
-12.90
+15
 --WebAppBoundary
 Content-Disposition: form-data; name="species"
 
@@ -125,4 +128,14 @@ Content-Disposition: form-data; name="image"; filename="autre-arbre.jpg"
 Content-Type: image/jpeg
 
 < ./images-test/autre-arbre.jpg
+--WebAppBoundary--
+
+### M1 PATCH avec seulement le prix (doit garder l'arbre publié)
+PATCH {{baseUrl}}/api/trees/merisier
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="price"
+
+14
 --WebAppBoundary--

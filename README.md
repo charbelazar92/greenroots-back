@@ -129,7 +129,6 @@ L'API écoute sur `http://localhost:3000` (variable `PORT`).
 
 | Rôle | Email | Mot de passe |
 |---|---|---|
-| Administrateur | `admin@greenroots.fr` | `Admin123!` |
 | Utilisateur | `julien.dupont@example.com` | `User123!` |
 | Utilisateur | `sofia.martin@example.com` | `User123!` |
 
@@ -411,7 +410,7 @@ Il n'y a pas, à ce stade, de pipeline CI automatisé (pas de workflow GitHub Ac
 
 | Composant | Hébergeur | URL | Notes |
 |---|---|---|---|
-| API | Render | `[à compléter après déploiement]` | Toutes les variables de la section 5 ; build `npm run build`, démarrage `npm start` |
+| API | Render | `https://greenroots-back-pf0p.onrender.com/` | Toutes les variables de la section 5 ; build `npm run build`, démarrage `npm start` |
 | Base de données et images | Supabase | - | Migrations via `npm run db:migrate:deploy` ; bucket **`tree-images`** à créer (accès public en lecture pour l'affichage des visuels) |
 
 Points d'attention en production :

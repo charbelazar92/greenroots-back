@@ -15,8 +15,8 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "ronaldo@madrid.com",
-  "password": "Portugal10"
+  "email": "user@greenroots.fr",
+  "password": "Usergreenroots1"
 }
 
 ### Connexion admin
@@ -24,7 +24,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@greenroots.fr",
+  "email": "charbelazar@greenroots.fr",
   "password": "Admin123!"
 }
 

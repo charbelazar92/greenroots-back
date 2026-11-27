@@ -210,6 +210,9 @@ export const treeController = {
           res.status(StatusCodes.CONFLICT).json({
             error: "Cet arbre est lié à une ou plusieurs commandes et ne peut pas être supprimé. Passez-le en brouillon pour ne plus qu'il soit disponible.",
           });
+        //Correction S2 : aucun arbre ne correspond à ce slug
+        //if (error.code === "P2025") {
+          //res.status(StatusCodes.NOT_FOUND).json({ error: "Arbre non trouvé" });
           return;
         }
 
